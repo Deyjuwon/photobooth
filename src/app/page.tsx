@@ -1,7 +1,6 @@
 "use client";
 import { useState, useRef, useCallback } from "react";
 import Image from "next/image";
-import { FiMenu } from "react-icons/fi";
 import { IoSearchOutline } from "react-icons/io5";
 import { FaHeart } from "react-icons/fa";
 import { useInfiniteQuery } from "@tanstack/react-query";
@@ -25,12 +24,12 @@ const fetchImages = async ({ pageParam = 1, query = "" }) => {
 
   const response = await fetch(url);
   const data = await response.json();
-
   return query ? data.results : data;
 };
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchTerm, setSearchTerm] = useState(""); 
   const observer = useRef<IntersectionObserver | null>(null);
 
   const {
@@ -40,18 +39,17 @@ export default function Home() {
     isFetchingNextPage,
     refetch,
   } = useInfiniteQuery({
-    queryKey: ["images", searchQuery],
-    queryFn: ({ pageParam }) => fetchImages({ pageParam, query: searchQuery }),
+    queryKey: ["images", searchTerm], 
+    queryFn: ({ pageParam }) => fetchImages({ pageParam, query: searchTerm }),
     getNextPageParam: (lastPage, allPages) => (lastPage.length > 0 ? allPages.length + 1 : undefined),
     initialPageParam: 1,
   });
 
-  const handleSearch = () => {
-    refetch();
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
+  const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      setSearchTerm(searchQuery.trim()); 
+      refetch();
+    }
   };
 
   const lastImageRef = useCallback(
@@ -74,7 +72,6 @@ export default function Home() {
         <p className="text-[30px] font-semibold">
           <span>Photo</span><span>Booth</span>
         </p>
-        <FiMenu className="text-2xl cursor-pointer" />
       </header>
 
       <div className="flex flex-col items-center justify-center my-6 gap-6">
@@ -87,9 +84,9 @@ export default function Home() {
             className="flex-1 h-full outline-none pl-3 w-full"
             placeholder="Search"
             value={searchQuery}
-            onChange={handleInputChange}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={handleSearch}
           />
-         
         </div>
       </div>
 
