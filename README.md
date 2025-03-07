@@ -1,6 +1,6 @@
 Unsplash Image Search App Documentation
 
-##Overview
+## Overview
 
 This is a Next.js application that fetches and displays images from the Unsplash API. It supports:
 
@@ -12,7 +12,7 @@ Random images on the initial page load.
 
 User and image details, including likes and photographer information.
 
-##Technologies Used
+## Technologies Used
 
 Next.js (React framework for server-side rendering and static site generation)
 
@@ -26,15 +26,15 @@ Tailwind CSS (for styling)
 
 React Icons (for UI icons)
 
-##Features
+## Features
 
-1. Initial Page Load
+### 1. Initial Page Load
 
 Fetches and displays a set of random images from Unsplash.
 
 No user input is required to see the first set of images.
 
-2. Search Functionality
+### 2. Search Functionality
 
 Users can type in the search bar without triggering an API call.
 
@@ -42,13 +42,13 @@ When the user presses Enter, the app searches for the entered query and updates 
 
 If the search bar is empty and Enter is pressed, the app resets to random images.
 
-3. Infinite Scrolling
+### 3. Infinite Scrolling
 
 When the user scrolls down, new images are loaded automatically.
 
 Uses Intersection Observer to detect when the last image is in view and fetch the next page.
 
-4. Image Cards
+### 4. Image Cards
 
 Each image shows:
 
@@ -58,9 +58,9 @@ The photographer's profile picture and name.
 
 The number of likes.
 
-API Integration
+## API Integration
 
-Fetching Images from Unsplash
+### Fetching Images from Unsplash
 
 The app makes API calls to Unsplash using the fetchImages function:
 
@@ -75,7 +75,7 @@ const fetchImages = async ({ pageParam = 1, query = "" }) => {
   return query ? data.results : data;
 };
 
-##Handling API Data
+## Handling API Data
 
 First Load: Fetches random images.
 
@@ -83,9 +83,9 @@ On Search: Fetches images based on the search term.
 
 Pagination: Uses useInfiniteQuery to handle loading more images.
 
-##Key Components
+## Key Components
 
-1. Search Bar
+### 1. Search Bar
 
 The user types a search query.
 
@@ -98,7 +98,7 @@ const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
   }
 };
 
-2. Infinite Scrolling
+### 2. Infinite Scrolling
 
 Uses Intersection Observer to detect when the last image is visible and load more images.
 
@@ -116,26 +116,26 @@ const lastImageRef = useCallback(
   [isFetchingNextPage, hasNextPage]
 );
 
-##How to Run the Project
+## How to Run the Project
 
-1. Clone the Repository
+### 1. Clone the Repository
 
 git clone https://github.com/your-repo-name.git
 cd your-repo-name
 
-2. Install Dependencies
+### 2. Install Dependencies
 
 npm install
 # or
 yarn install
 
-3. Set Up Environment Variables
+### 3. Set Up Environment Variables
 
 Create a .env.local file in the root directory and add:
 
 NEXT_PUBLIC_UNSPLASH_ACCESS_KEY=your_unsplash_api_key
 
-4. Run the Development Server
+### 4. Run the Development Server
 
 npm run dev
 # or
