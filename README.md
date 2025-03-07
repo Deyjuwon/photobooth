@@ -141,4 +141,4 @@ npm run dev
 # or
 yarn dev
 
-Visit https://photobooth-navy.vercel.app/ to see the app in action.
+Visit https://localhost/3000/ to see the app in action.
