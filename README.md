@@ -120,8 +120,8 @@ const lastImageRef = useCallback(
 
 ### 1. Clone the Repository
 
-git clone https://github.com/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/photobooth.git
+cd photobooth
 
 ### 2. Install Dependencies
 
