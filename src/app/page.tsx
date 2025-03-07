@@ -48,6 +48,7 @@ export default function Home() {
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       setSearchTerm(searchQuery.trim()); 
+      setSearchQuery(""); 
       refetch();
     }
   };
@@ -90,7 +91,13 @@ export default function Home() {
         </div>
       </div>
 
+      {searchTerm && (
+          <p className="text-lg font-semibold mb-4">
+            Showing results for <span className="text-blue-600">"{searchTerm}"</span>
+          </p>
+        )}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        
         {data?.pages.map((group, i) =>
           group.map((image: UnsplashImage, index: number) => (
             <div
